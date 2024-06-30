@@ -1,8 +1,5 @@
-# React + Vite
+# Blog Frontend for Users
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is my frontend for users of my Blog Post Api. The purpose of this Client side view is to display a list of blog post fetched from my RESTful API in a list for the client to be able to read , comment and like .

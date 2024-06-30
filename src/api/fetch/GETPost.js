@@ -1,4 +1,5 @@
-const GETPost = async (postId) => {
+const GETPost = async (postId, signal) => {
+  console.log(postId);
   const postURl = import.meta.env.VITE_POSTS_URI;
   const fetchUrl = postURl + "/" + postId;
   const response = await fetch(fetchUrl, {
@@ -7,9 +8,10 @@ const GETPost = async (postId) => {
       "Content-Type": "application/json",
     },
     mode: "cors",
+    signal: signal,
   });
   if (!response.ok) {
-    throw new Error("Network response was not ok");
+    throw new Error(response.statusText);
   }
   const data = await response.json();
   return data;

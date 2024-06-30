@@ -1,6 +1,7 @@
 import propTypes from "prop-types";
-import GetPost from "../api/fetch/GETPost";
+
 import usePostsContext from "../context/contextHooks/postsHook";
+import { Link } from "react-router-dom";
 function Posts() {
   const { posts, loading, error } = usePostsContext();
 
@@ -11,28 +12,26 @@ function Posts() {
   console.log(posts);
   return (
     <div className="mt-2 flex flex-col items-center justify-center gap-2">
-      <h1 className="h1">Posts</h1>
+      <h1 className="text-xl font-extrabold">Posts</h1>
       {posts && posts.length > 0 ? (
         posts.map((post) => (
-          <>
-            <div className="postCard" key={post._id}>
-              <h2 className="col-start-1 col-end-4 self-center text-xl font-bold">
-                {post.title}
-              </h2>
+          <div className="postCard" key={post._id}>
+            <h2 className="col-start-1 col-end-4 self-center text-xl font-bold">
+              {post.title}
+            </h2>
 
-              <h3 className="row-start-2 row-end-3 self-start">
-                Written by : {post.author.first_name}
-              </h3>
-              <p className="row-start-3">Created on : {post.createdAt}</p>
-              <button
-                className="btn col-start-3 row-start-3 row-end-4 justify-self-center"
-                onClick={GetPost}
-              >
-                View post
-              </button>
-            </div>
-            <hr className="border-t-2 border-gray-400" />
-          </>
+            <h3 className="row-start-2 row-end-3 self-start">
+              Written by : {post.author.first_name}
+            </h3>
+            <p className="row-start-3">Created on : {post.createdAt}</p>
+
+            <Link
+              to={`/posts/${post._id}`}
+              className="btn col-start-3 row-start-3 row-end-4 justify-self-center"
+            >
+              View post
+            </Link>
+          </div>
         ))
       ) : (
         <h2>There are no post!</h2>

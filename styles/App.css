@@ -1,12 +1,54 @@
+:root {
+  --background-light: #e7e5e4;
+  --text-light: #292524;
+  --background-dark: #333;
+  --text-dark: #e2e8f0;
+}
+
 html,
 body {
   height: 100%;
-  background-color: #f7fafc;
+}
+
+.light {
+  background-color: var(--background-light);
+
+  h1,
+  header,
+  footer {
+    color: var(--text-light);
+  }
+
+  .postPage,
+  .postCard {
+    background-color: #f8f9fa;
+    color: var(--text-light);
+  }
+}
+
+.dark {
+  background-color: var(--background-dark);
+
+  h1,
+  header {
+    color: var(--text-dark);
+  }
+
+  footer {
+    background-color: #333;
+    color: #fff;
+  }
+
+  .postPage,
+  .postCard {
+    background-color: #475569;
+    color: var(--text-dark);
+  }
 }
 
 #root {
   max-width: 100%;
-  margin: 0px;
+  margin: 0;
   padding: 0;
   text-align: center;
 }

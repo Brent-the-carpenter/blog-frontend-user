@@ -1,13 +1,7 @@
 import propTypes, { string } from "prop-types";
 
-function ErrorPage({ errors }) {
-  return (
-    <div>
-      {errors.forEach((error) => {
-        return <li>{error}</li>;
-      })}
-    </div>
-  );
+function ErrorPage({ error }) {
+  return <div>{error}</div>;
 }
 export default ErrorPage;
 

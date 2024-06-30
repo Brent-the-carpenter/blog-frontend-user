@@ -12,10 +12,20 @@ function App() {
   useEffect(() => {
     setPosts(GETPosts());
   }, []);
-  console.log(posts);
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    if (theme === "dark") {
+      document.body.classList.add("dark");
+      document.body.classList.remove("light");
+      window.me;
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.add("light");
+    }
+  }, [theme]);
   return (
     <>
-      <Header />
+      <Header theme={theme} setTheme={setTheme} />
       <PostsProvider>
         <Outlet />
       </PostsProvider>

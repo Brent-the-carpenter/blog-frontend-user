@@ -2,7 +2,7 @@ function Footer() {
   const currentDate = new Date().getFullYear();
   return (
     <>
-      <div className="absolute bottom-0 flex w-full items-center justify-center gap-2 bg-slate-500 text-stone-100">
+      <footer className="absolute bottom-0 flex w-full items-center justify-center gap-2">
         {" "}
         {currentDate}{" "}
         <a
@@ -24,7 +24,7 @@ function Footer() {
             />
           </svg>
         </a>
-      </div>
+      </footer>
     </>
   );
 }

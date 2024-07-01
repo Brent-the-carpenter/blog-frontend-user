@@ -11,7 +11,9 @@ const GETPost = async (postId, signal) => {
     signal: signal,
   });
   if (!response.ok) {
-    throw new Error(response.statusText);
+    const error = new Error(response.statusText);
+    error.status = response.status;
+    throw error;
   }
   const data = await response.json();
   return data;

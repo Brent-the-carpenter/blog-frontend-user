@@ -8,7 +8,10 @@ const likePost = async (postID) => {
     mode: "cors",
   });
   if (!response.ok) {
-    throw new Error("Error liking post");
+    const error = new Error(response.statusText);
+    error.status = response.status;
+    error.message = response.statusText;
+    throw error;
   }
   const data = await response.json();
   return data;

@@ -11,16 +11,15 @@ function Header({ user, setTheme, theme }) {
         The Carpenters Blog
       </h1>
 
-      <nav className="flex-0 self-end">
-        <ul className="items center flex justify-end gap-3">
-          {!user ? (
-            <button className="btn">signUp</button>
-          ) : user.token ? (
-            <button className="btn">Logout</button>
+      <nav className="min-w-80 flex-1 content-end">
+        <ul className="items center flex items-start justify-end gap-5 text-lg">
+          {!user && <Link className="link">signUp</Link>}
+          {user && user.token ? (
+            <Link className="link">Logout</Link>
           ) : (
-            <button className="btn">Login</button>
+            <Link className="link">Login</Link>
           )}
-          <Link to={"posts"} className="btn">
+          <Link className="link" to={"posts"}>
             Posts
           </Link>
           <button onClick={changeTheme}>

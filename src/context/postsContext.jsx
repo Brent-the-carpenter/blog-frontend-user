@@ -1,27 +1,36 @@
 import { createContext, useMemo } from "react";
 import propTypes from "prop-types";
-import useGETPosts from "../api/hooks/useGetPosts";
+import useGetPosts from "../api/hooks/useGetPosts";
 import { DateTime } from "luxon";
+
 export const PostsContext = createContext({
-  Posts: [],
+  posts: [],
   loading: true,
   error: null,
 });
 
 const PostsProvider = ({ children }) => {
-  const { posts, loading, error } = useGETPosts();
-  const formattedPost = posts.map((post) => ({
-    ...post,
-    createdAt: DateTime.fromISO(post.createdAt).toFormat("MM/dd/yyyy"),
-  }));
+  const { posts, loading, error } = useGetPosts();
+  console.log(error);
+
+  const formattedPosts = useMemo(() => {
+    return Array.isArray(posts)
+      ? posts.map((post) => ({
+          ...post,
+          createdAt: DateTime.fromISO(post.createdAt).toFormat("MM/dd/yyyy"),
+        }))
+      : [];
+  }, [posts]);
+
   const value = useMemo(
     () => ({
-      posts: formattedPost,
+      posts: formattedPosts,
       loading,
       error,
     }),
-    [error, loading, formattedPost],
+    [error, loading, formattedPosts],
   );
+
   return (
     <PostsContext.Provider value={value}>{children}</PostsContext.Provider>
   );
@@ -33,4 +42,5 @@ PostsProvider.propTypes = {
     propTypes.node,
   ]).isRequired,
 };
+
 export default PostsProvider;

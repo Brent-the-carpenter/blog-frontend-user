@@ -4,14 +4,10 @@ import "../styles/App.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import { useEffect, useState } from "react";
-import GETPosts from "./api/fetch/GETPosts";
+
 import { Outlet } from "react-router-dom";
 import PostsProvider from "./context/postsContext";
 function App() {
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    setPosts(GETPosts());
-  }, []);
   const [theme, setTheme] = useState("light");
   useEffect(() => {
     if (theme === "dark") {

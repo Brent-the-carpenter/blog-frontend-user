@@ -14,6 +14,11 @@ body {
   background-color: var(--background-light);
 
   h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
   header,
   footer {
     color: var(--text-light);
@@ -30,6 +35,11 @@ body {
   background-color: var(--background-dark);
 
   h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
   header {
     color: var(--text-dark);
   }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { DateTime } from "luxon";
 const useGetPost = (postId) => {
   console.log("Post id in hook ", postId);
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,13 +19,17 @@ const useGetPost = (postId) => {
           );
           setPost(post);
           setError(null);
-          setLoading(false);
         }
       } catch (error) {
-        setError(error);
+        if (error.name !== "AbortError") {
+          setError({ message: error.message, status: error.status });
+        }
+
         console.log(error);
-        setLoading(false);
+
         return error;
+      } finally {
+        setLoading(false);
       }
     };
     fetchPost();

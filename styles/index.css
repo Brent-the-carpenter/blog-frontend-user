@@ -26,4 +26,7 @@
   .h1 {
     @apply text-2xl font-bold;
   }
+  .link {
+    @apply text-xl text-blue-500 opacity-80 hover:font-bold hover:text-blue-700 hover:underline hover:opacity-100 hover:transition-opacity focus:-translate-y-2 focus:underline focus:transition-transform;
+  }
 }

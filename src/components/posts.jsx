@@ -1,15 +1,15 @@
-import propTypes from "prop-types";
-
+import PropTypes from "prop-types";
 import usePostsContext from "../context/contextHooks/postsHook";
 import { Link } from "react-router-dom";
+
 function Posts() {
   const { posts, loading, error } = usePostsContext();
 
   if (loading) return <div>Loading....</div>;
-  if (error) {
-    return <div>Error fetching post {error.message}</div>;
-  }
-  console.log(posts);
+  if (error) return <div>Error fetching posts: {error.message}</div>;
+
+  console.log("error in post.jsx", error);
+
   return (
     <div className="mt-2 flex flex-col items-center justify-center gap-2">
       <h1 className="text-xl font-extrabold">Posts</h1>
@@ -19,12 +19,10 @@ function Posts() {
             <h2 className="col-start-1 col-end-4 self-center text-xl font-bold">
               {post.title}
             </h2>
-
             <h3 className="row-start-2 row-end-3 self-start">
-              Written by : {post.author.first_name}
+              Written by: {post.author.first_name}
             </h3>
-            <p className="row-start-3">Created on : {post.createdAt}</p>
-
+            <p className="row-start-3">Created on: {post.createdAt}</p>
             <Link
               to={`/posts/${post._id}`}
               className="btn col-start-3 row-start-3 row-end-4 justify-self-center"
@@ -34,19 +32,23 @@ function Posts() {
           </div>
         ))
       ) : (
-        <h2>There are no post!</h2>
+        <h2>There are no posts!</h2>
       )}
     </div>
   );
 }
 
-export default Posts;
 Posts.propTypes = {
-  posts: propTypes.arrayOf(
-    propTypes.shape({
-      _id: propTypes.string,
-      title: propTypes.string,
-      createdAt: propTypes.string,
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+      author: PropTypes.shape({
+        first_name: PropTypes.string.isRequired,
+      }).isRequired,
     }),
   ),
 };
+
+export default Posts;

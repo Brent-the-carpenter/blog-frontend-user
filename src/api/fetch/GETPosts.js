@@ -9,12 +9,16 @@ async function GETPosts(signal) {
       signal: signal,
     });
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      const error = new Error(response.statusText);
+      error.status = response.status;
+      error.message = await response.text();
+      throw error;
     }
     const data = await response.json();
     return data;
   } catch (error) {
-    throw new Error(`Failed to fetch post:${error.message}`);
+    console.log("Error in GETPosts ");
+    throw error;
   }
 }
 

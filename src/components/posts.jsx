@@ -6,7 +6,8 @@ function Posts() {
   const { posts, loading, error } = usePostsContext();
 
   if (loading) return <div>Loading....</div>;
-  if (error) return <div>Error fetching posts: {error.message}</div>;
+  if (error)
+    return <h1 className="text-3xl">Error fetching posts: {error.message}</h1>;
 
   console.log("error in post.jsx", error);
 

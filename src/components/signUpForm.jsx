@@ -1,44 +1,128 @@
-import POSTSignUp from "../api/fetch/POSTSignUp";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useSignUp from "../api/hooks/useSignUp";
+
 function SignUpForm() {
-  const [] = useState();
-  const [] = useState();
-  const [] = useState();
-  const [] = useState();
-  const [] = useState();
+  const [email, setEmail] = useState("");
+  const [user_name, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [submit, setSubmit] = useState(false);
+
+  const { signUpUser, loading, signUpError, validationErrors, user } =
+    useSignUp();
+
+  useEffect(() => {
+    if (submit) {
+      const formData = {
+        email,
+        user_name,
+        password,
+        confirmPassword,
+        first_name,
+      };
+      signUpUser(formData);
+      setSubmit(false); // Reset submit state after handling signup
+    }
+  }, [
+    submit,
+    email,
+    user_name,
+    password,
+    confirmPassword,
+    first_name,
+    signUpUser,
+  ]);
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    setSubmit(true);
+  };
+
+  const getErrorMessage = (field) => {
+    const error = validationErrors.find((error) => error.path === field);
+    return error ? error.msg : null;
+  };
+
   return (
-    <div>
-      <form action="/authentication/signup" method="POST">
-        <div>
+    <div className="flex flex-col content-center items-center gap-4 p-2">
+      <h1 className="text-3xl">Sign Up today!</h1>
+      <form className="form" onSubmit={handleSignUp}>
+        <div className="formControl">
+          <label htmlFor="first_name">Name:</label>
+          <input
+            type="text"
+            name="first_name"
+            id="first_name"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          {getErrorMessage("first_name") && (
+            <p className="error">{getErrorMessage("first_name")}</p>
+          )}
+        </div>
+        <div className="formControl">
           <label htmlFor="email">Email:</label>
-          <input type="email" name="email" id="email" required={true} />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          {getErrorMessage("email") && (
+            <p className="error">{getErrorMessage("email")}</p>
+          )}
         </div>
         <div className="formControl">
           <label htmlFor="user_name">User Name:</label>
-          <input name="user_name" id="user_name" type="text" required={true} />
+          <input
+            name="user_name"
+            id="user_name"
+            type="text"
+            autoComplete="username"
+            onChange={(e) => setUserName(e.target.value)}
+            required
+          />
+          {getErrorMessage("user_name") && (
+            <p className="error">{getErrorMessage("user_name")}</p>
+          )}
         </div>
-
         <div className="formControl">
-          <label htmlFor="password">Please Enter a Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             name="password"
             id="password"
             type="password"
-            required={true}
+            autoComplete="new-password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
+          {getErrorMessage("password") && (
+            <p className="error">{getErrorMessage("password")}</p>
+          )}
         </div>
         <div className="formControl">
-          <label htmlFor="confirm_password"> Confirm password:</label>
+          <label htmlFor="confirm_password">Confirm Password:</label>
           <input
             name="confirm_password"
             id="confirm_password"
             type="password"
-            required={true}
+            autoComplete="new-password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
           />
+          {getErrorMessage("confirm_password") && (
+            <p className="error">{getErrorMessage("confirm_password")}</p>
+          )}
         </div>
-        <button onClick={POSTSignUp}>Submit</button>
+        <button type="submit" className="btn p-2" disabled={loading}>
+          {loading ? "Signing up..." : "Submit"}
+        </button>
+        {signUpError && <p>Error: {signUpError.message}</p>}
+        {user && <p>Sign up successful!</p>}
       </form>
     </div>
   );
 }
+
 export default SignUpForm;

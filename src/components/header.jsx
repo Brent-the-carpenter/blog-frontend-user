@@ -13,7 +13,11 @@ function Header({ user, setTheme, theme }) {
 
       <nav className="min-w-80 flex-1 content-end">
         <ul className="items center flex items-start justify-end gap-5 text-lg">
-          {!user && <Link className="link">signUp</Link>}
+          {!user && (
+            <Link to={"signup"} className="link">
+              signUp
+            </Link>
+          )}
           {user && user.token ? (
             <Link className="link">Logout</Link>
           ) : (

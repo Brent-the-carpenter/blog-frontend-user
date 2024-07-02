@@ -22,11 +22,22 @@ body {
   header,
   footer {
     color: var(--text-light);
+    svg {
+      path {
+        fill: var(--text-light);
+      }
+    }
+    a:hover svg {
+      path {
+        fill: #a8a29e;
+      }
+    }
   }
 
   .postPage,
-  .postCard {
-    background-color: #f8f9fa;
+  .postCard,
+  form {
+    background-color: #334155;
     color: var(--text-light);
   }
 }
@@ -47,10 +58,21 @@ body {
   footer {
     background-color: #333;
     color: #fff;
+    svg {
+      path {
+        fill: var(--text-dark);
+      }
+    }
+    a:hover svg {
+      path {
+        fill: #a8a29e;
+      }
+    }
   }
 
   .postPage,
-  .postCard {
+  .postCard,
+  form {
     background-color: #475569;
     color: var(--text-dark);
   }

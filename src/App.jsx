@@ -20,14 +20,14 @@ function App() {
     }
   }, [theme]);
   return (
-    <>
+    <div className="flex flex-col">
       <Header theme={theme} setTheme={setTheme} />
       <PostsProvider>
         <Outlet />
       </PostsProvider>
 
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -10,6 +10,9 @@ export default {
       colors: {
         "primary-bg": "#6b7280",
       },
+      gridTemplateColumns: {
+        form: "1fr 2fr",
+      },
     },
   },
   plugins: [],

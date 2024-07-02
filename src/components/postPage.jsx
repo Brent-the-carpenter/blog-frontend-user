@@ -29,7 +29,8 @@ function PostPage() {
   if (error) {
     <h1>Error fetching post.</h1>;
   }
-  if (errors && errors.status !== 401) return <h1>{errors.msg}</h1>;
+  if (errors && errors.status !== 401)
+    return <h1 className="text-3xl">{errors.msg}</h1>;
   if (loading || !post) return <h1>Loading ....</h1>;
   console.log(post);
   const { createdAt, author, images, content } = post;
@@ -45,7 +46,7 @@ function PostPage() {
       <div>
         <button onClick={handleLikePost}>❤️</button>
         {likes}
-        {errors && <p>{errors.msg}</p>}
+        {errors && <p className="text-3xl">{errors.msg}</p>}
       </div>
     </div>
   );

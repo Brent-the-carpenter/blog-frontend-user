@@ -4,6 +4,7 @@ import Posts from "./components/posts";
 import PostPage from "./components/postPage";
 import NotFound from "./components/404NotFound";
 import SignUpForm from "./components/signUpForm";
+import Home from "./components/homePage";
 
 const routes = [
   {
@@ -11,8 +12,8 @@ const routes = [
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      { index: true, element: <Home /> },
       {
-        index: true,
         element: <Posts />,
         path: "posts",
       },
@@ -21,7 +22,7 @@ const routes = [
         element: <PostPage />,
       },
       { path: "/signup", element: <SignUpForm /> },
-      { path: "*", element: <NotFound /> },
+      { path: "/*", element: <NotFound /> },
     ],
   },
 ];

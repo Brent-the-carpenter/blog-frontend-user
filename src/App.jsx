@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { Outlet } from "react-router-dom";
 import PostsProvider from "./context/postsContext";
+import UserProvider from "./context/userContext";
 function App() {
   const [theme, setTheme] = useState("light");
   useEffect(() => {
@@ -20,13 +21,15 @@ function App() {
     }
   }, [theme]);
   return (
-    <div className="flex flex-col">
-      <Header theme={theme} setTheme={setTheme} />
-      <PostsProvider>
-        <Outlet />
-      </PostsProvider>
+    <div className="flex h-full flex-col">
+      <UserProvider>
+        <Header theme={theme} setTheme={setTheme} />
+        <PostsProvider>
+          <Outlet />
+        </PostsProvider>
 
-      <Footer />
+        <Footer />
+      </UserProvider>
     </div>
   );
 }

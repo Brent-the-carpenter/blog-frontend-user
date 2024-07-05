@@ -12,7 +12,7 @@ function Posts() {
   console.log("error in post.jsx", error);
 
   return (
-    <div className="mt-2 flex flex-col items-center justify-center gap-2">
+    <div className="mt-2 flex flex-1 flex-col items-center gap-2">
       <h1 className="text-xl font-extrabold">Posts</h1>
       {posts && posts.length > 0 ? (
         posts.map((post) => (

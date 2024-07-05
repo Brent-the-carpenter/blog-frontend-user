@@ -35,7 +35,7 @@ function PostPage() {
   console.log(post);
   const { createdAt, author, images, content } = post;
   return (
-    <div className="postPage m-20 p-4 text-xl shadow-md dark:text-stone-800">
+    <div className="postPage m-20 h-full p-4 text-xl shadow-md dark:text-stone-800">
       {images && images.length > 0 && <img src={images[0]}></img>}
       <h1 className="text-4xl">{post.title}</h1>
       <div>

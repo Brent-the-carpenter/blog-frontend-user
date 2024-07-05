@@ -20,8 +20,9 @@ const useSignUp = () => {
     } catch (error) {
       if (error.status === 400) {
         setValidationErrors(error.errors);
+        console.log(error.errors);
       } else {
-        setSignUpError(error);
+        setSignUpError(error.message);
       }
     } finally {
       setLoading(false);

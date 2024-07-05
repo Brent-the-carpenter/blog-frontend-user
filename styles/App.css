@@ -37,7 +37,7 @@ body {
   .postPage,
   .postCard,
   form {
-    background-color: #334155;
+    background-color: #e2e8f0;
     color: var(--text-light);
   }
 }

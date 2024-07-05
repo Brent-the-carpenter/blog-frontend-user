@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import useSignUp from "../api/hooks/useSignUp";
 
 function SignUpForm() {
   const [email, setEmail] = useState("");
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirm_password, setConfirmPassword] = useState("");
   const [first_name, setFirstName] = useState("");
   const [submit, setSubmit] = useState(false);
-
+  const navigate = useNavigate();
   const { signUpUser, loading, signUpError, validationErrors, user } =
     useSignUp();
 
@@ -18,21 +19,33 @@ function SignUpForm() {
         email,
         user_name,
         password,
-        confirmPassword,
+        confirm_password,
         first_name,
       };
       signUpUser(formData);
-      setSubmit(false); // Reset submit state after handling signup
+      setSubmit(false);
     }
   }, [
     submit,
     email,
     user_name,
     password,
-    confirmPassword,
+    confirm_password,
     first_name,
     signUpUser,
   ]);
+  useEffect(() => {
+    if (user) {
+      setEmail("");
+      setFirstName("");
+      setUserName("");
+      setPassword("");
+      setConfirmPassword("");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+    }
+  }, [user, navigate]);
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -45,7 +58,7 @@ function SignUpForm() {
   };
 
   return (
-    <div className="flex flex-col content-center items-center gap-4 p-2">
+    <div className="flex flex-1 flex-col content-center items-center gap-4 p-2">
       <h1 className="text-3xl">Sign Up today!</h1>
       <form className="form" onSubmit={handleSignUp}>
         <div className="formControl">

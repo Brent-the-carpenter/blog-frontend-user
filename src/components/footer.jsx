@@ -2,7 +2,7 @@ function Footer() {
   const currentDate = new Date().getFullYear();
   return (
     <>
-      <footer className="sticky -bottom-full mb-2 mt-2 flex w-full items-center justify-center gap-2">
+      <footer className="sticky bottom-0 mb-2 mt-2 flex w-full items-center justify-center gap-2">
         {" "}
         {currentDate}{" "}
         <a

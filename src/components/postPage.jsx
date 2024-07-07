@@ -1,53 +1,67 @@
 import PropTypes from "prop-types";
 import useGetPost from "../api/hooks/useGetPost";
-import likePost from "../api/fetch/POSTLikePost";
+import CommentSection from "./CommentSection";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import useLikePost from "../api/hooks/useLikePost";
 function PostPage() {
   const { postId } = useParams();
   const { error, loading, post } = useGetPost(postId);
   const [likes, setLikes] = useState(0);
-  const [errors, setErrors] = useState(null);
+
+  const { likePost, success, likeError, PostLikes, like } = useLikePost();
+
   useEffect(() => {
     if (post) {
       setLikes(post.likes);
+      if (PostLikes) {
+        setLikes(PostLikes);
+      }
     }
-  }, [post, errors]);
-
-  const handleLikePost = async () => {
-    try {
-      await likePost(postId);
-      setLikes(likes + 1);
-    } catch (err) {
-      console.error("Error liking post:", err);
-      if (err.status === 401) setErrors({ msg: "Please login to like post!" });
-      if (err.status === 429) setErrors({ status: 429, msg: err.message });
-    }
-  };
+  }, [post, PostLikes]);
 
   if (error) {
-    <h1>Error fetching post.</h1>;
+    return <h1> {error.message}.</h1>;
   }
-  if (errors && errors.status !== 401)
-    return <h1 className="text-3xl">{errors.msg}</h1>;
+
   if (loading || !post) return <h1>Loading ....</h1>;
   console.log(post);
-  const { createdAt, author, images, content } = post;
+  const { createdAt, author, images, content, comments } = post;
   return (
-    <div className="postPage m-20 h-full p-4 text-xl shadow-md dark:text-stone-800">
+    <div className="postPage m-20 flex flex-col gap-3 p-4 text-3xl max-sm:text-xl">
       {images && images.length > 0 && <img src={images[0]}></img>}
-      <h1 className="text-4xl">{post.title}</h1>
+      <h1 className="text-9xl max-sm:text-6xl">{post.title}</h1>
+      <hr />
+      <br />
       <div>
-        <div>{author.user_name}</div>
-        <div>{createdAt}</div>
+        <div className="">
+          By{" "}
+          <strong>
+            <em>{author.user_name}</em>
+          </strong>
+        </div>
+        <div>
+          Published: <strong>{createdAt}</strong>
+        </div>
+        <hr />
       </div>
-      <div>{content}</div>
-      <div>
-        <button onClick={handleLikePost}>❤️</button>
+      {images && images.length > 0 && <img src={images[0]} alt="post image" />}
+      <div className="text-start">{content}</div>
+      <div className="flex justify-center gap-2">
+        <button
+          onClick={() => {
+            likePost(postId);
+            setLikes(PostLikes);
+          }}
+          disabled={like}
+        >
+          ❤️
+        </button>
         {likes}
-        {errors && <p className="text-3xl">{errors.msg}</p>}
+        {success && <p>{success}</p>}
+        {likeError && <p>{likeError}</p>}
       </div>
+      <CommentSection postId={postId} comments={comments} />
     </div>
   );
 }

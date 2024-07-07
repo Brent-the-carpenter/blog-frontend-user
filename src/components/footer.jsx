@@ -2,12 +2,14 @@ function Footer() {
   const currentDate = new Date().getFullYear();
   return (
     <>
-      <footer className="sticky bottom-0 mb-2 mt-2 flex w-full items-center justify-center gap-2">
+      <footer className="static bottom-0 mb-2 mt-2 flex w-full items-center justify-center gap-2">
         {" "}
         {currentDate}{" "}
         <a
           className="group flex items-center gap-2 hover:text-stone-400"
-          href=""
+          href="https://github.com/Brent-the-carpenter/blog-frontend-user"
+          target="blank"
+          rel="noreferrer noopener"
         >
           Brent The Carpenter
           <svg

@@ -17,17 +17,19 @@ const useGetPost = (postId) => {
           post.createdAt = DateTime.fromISO(post.createdAt).toFormat(
             "MM/dd/yyyy",
           );
+          post.comments.map((comment) => {
+            comment.time_stamp = DateTime.fromISO(comment.time_stamp).toFormat(
+              "MM/dd/yyyy",
+            );
+          });
           setPost(post);
           setError(null);
         }
       } catch (error) {
         if (error.name !== "AbortError") {
-          setError({ message: error.message, status: error.status });
+          setError(error.status);
+          console.log("error fetching post: ");
         }
-
-        console.log(error);
-
-        return error;
       } finally {
         setLoading(false);
       }

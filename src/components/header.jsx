@@ -40,22 +40,32 @@ function Header({ setTheme, theme }) {
 
   return (
     <div className="flex flex-col">
-      <header className="flex flex-wrap justify-center gap-2 border-b-stone-300 p-7 pt-2 align-middle dark:border-b-stone-300">
-        <h1 className="align-center flex flex-grow justify-center pt-10 text-4xl font-bold underline underline-offset-1">
+      <header className="flex flex-wrap justify-center gap-2 border-b-stone-300 pb-7 pl-7 pr-7 align-middle dark:border-b-stone-300">
+        <h1 className="align-center flex flex-grow items-center justify-center pt-1 text-4xl font-bold underline underline-offset-1">
           The Carpenters Blog
         </h1>
-        <div>
-          <div>{user.userName}</div>
+
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-end gap-4 pt-8 max-sm:justify-center">
+            <div className="text-xl font-bold">{user.userName}</div>
+            {user && user.token && (
+              <Link to={"#"} className="link" onClick={logoutUser}>
+                Logout
+              </Link>
+            )}
+          </div>
+          <hr />
           <nav className="min-w-80 flex-1 content-end">
-            <ul className="items center flex items-start justify-end gap-5 text-lg">
+            <ul className="items center flex items-start justify-end gap-5 text-lg max-sm:justify-center">
               {!user && (
                 <Link to={"signup"} className="link">
                   Sign Up
                 </Link>
               )}
-              {user && user.token ? (
-                <Link to={"#"} className="link" onClick={logoutUser}>
-                  Logout
+
+              {user ? (
+                <Link to={"/"} className="link">
+                  Home
                 </Link>
               ) : (
                 <Link
@@ -67,6 +77,7 @@ function Header({ setTheme, theme }) {
                   Login
                 </Link>
               )}
+
               <Link className="link" to={"posts"}>
                 Posts
               </Link>
@@ -77,11 +88,11 @@ function Header({ setTheme, theme }) {
           </nav>
         </div>
 
-        {showLogin && (
+        {showLogin && !user && (
           <div
             ref={loginRef}
             tabIndex={-1}
-            className="login absolute right-1 top-32 p-2"
+            className="p-2 transition-transform focus-within:translate-x-0 focus-within:opacity-100"
             onBlur={handleBlur}
           >
             <Login loginRef={loginRef} />

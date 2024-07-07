@@ -33,8 +33,17 @@ body {
       }
     }
   }
+  hr {
+    border: 1px solid var(--text-light);
+  }
+  .comments {
+    color: var(--text-light);
+  }
+  .postPage {
+    color: var(--text-light);
+  }
 
-  .postPage,
+  .header,
   .postCard,
   form {
     background-color: #e2e8f0;
@@ -54,6 +63,18 @@ body {
   header {
     color: var(--text-dark);
   }
+  hr {
+    border: 1px solid var(--text-dark);
+  }
+  .comments {
+    color: var(--text-dark);
+  }
+  .comment {
+    background-color: #475569;
+    color: var(--text-dark);
+    border: 1px solid var(--text-dark);
+    border-radius: 0.5rem;
+  }
 
   footer {
     background-color: #333;
@@ -69,8 +90,10 @@ body {
       }
     }
   }
+  .header {
+    background-color: var(--background-dark);
+  }
 
-  .postPage,
   .postCard,
   form {
     background-color: #475569;

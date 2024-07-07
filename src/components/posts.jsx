@@ -13,7 +13,7 @@ function Posts() {
 
   return (
     <div className="mt-2 flex flex-1 flex-col items-center gap-2">
-      <h1 className="text-xl font-extrabold">Posts</h1>
+      <h1 className="text-2xl font-extrabold">Posts</h1>
       {posts && posts.length > 0 ? (
         posts.map((post) => (
           <div className="postCard" key={post._id}>
@@ -33,7 +33,7 @@ function Posts() {
           </div>
         ))
       ) : (
-        <h2>There are no posts!</h2>
+        <h2 className="h-full">There are no posts!</h2>
       )}
     </div>
   );

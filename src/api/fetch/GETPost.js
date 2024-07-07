@@ -10,12 +10,14 @@ const GETPost = async (postId, signal) => {
     mode: "cors",
     signal: signal,
   });
+  const data = await response.json();
   if (!response.ok) {
     const error = new Error(response.statusText);
     error.status = response.status;
+    error.msg = data.msg;
     throw error;
   }
-  const data = await response.json();
+
   return data;
 };
 export default GETPost;

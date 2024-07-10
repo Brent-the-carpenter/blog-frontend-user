@@ -46,7 +46,10 @@ function PostPage() {
         <hr />
       </div>
       {images && images.length > 0 && <img src={images[0]} alt="post image" />}
-      <div className="text-start">{content}</div>
+      <div
+        dangerouslySetInnerHTML={{ __html: content }}
+        className="text-start"
+      ></div>
       <div className="flex justify-center gap-2">
         <button
           onClick={() => {

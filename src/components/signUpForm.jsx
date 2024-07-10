@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSignUp from "../api/hooks/useSignUp";
 
@@ -128,6 +128,7 @@ function SignUpForm() {
             <p className="error">{getErrorMessage("confirm_password")}</p>
           )}
         </div>
+
         <button type="submit" className="btn p-2" disabled={loading}>
           {loading ? "Signing up..." : "Submit"}
         </button>

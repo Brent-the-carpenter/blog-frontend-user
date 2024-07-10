@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useState, useRef, useEffect } from "react";
 import useUserContext from "../context/contextHooks/userHook";
 import useLogout from "../api/hooks/useLogout";
+import defaultAvatar from "../assets/user.png";
 function Header({ setTheme, theme }) {
   const [showLogin, setShowLogin] = useState(false);
   const loginRef = useRef(null);
@@ -47,6 +48,11 @@ function Header({ setTheme, theme }) {
 
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-end gap-4 pt-8 max-sm:justify-center">
+            <img
+              src={user.avatar || defaultAvatar}
+              alt="user avatar"
+              className="h-10 w-10 rounded-full"
+            />
             <div className="text-xl font-bold">{user.userName}</div>
             {user && user.token && (
               <Link to={"#"} className="link" onClick={logoutUser}>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useSignUp from "../api/hooks/useSignUp";
+import useSignUp from "../../api/hooks/useSignUp";
 
 function SignUpForm() {
   const [email, setEmail] = useState("");

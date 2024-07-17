@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import usePostComment from "../api/hooks/usePostComment";
+import usePostComment from "../../api/hooks/usePostComment";
 import { useEffect, useState } from "react";
 
 function CommentSection({ postId, comments }) {

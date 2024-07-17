@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import useGetPost from "../api/hooks/useGetPost";
+import useGetPost from "../../api/hooks/useGetPost";
 import CommentSection from "./CommentSection";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useLikePost from "../api/hooks/useLikePost";
+import useLikePost from "../../api/hooks/useLikePost";
 function PostPage() {
   const { postId } = useParams();
   const { error, loading, post } = useGetPost(postId);

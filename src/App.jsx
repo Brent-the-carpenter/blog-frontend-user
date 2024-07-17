@@ -1,13 +1,13 @@
 import "../styles/App.css";
 // import { Outlet } from "react-router-dom";
 // import { useEffect, useState } from "react";
-import Header from "./components/header";
-import Footer from "./components/footer";
+import Header from "./components/Header/header";
+import Footer from "./components/Footer/footer";
 import { useEffect, useState } from "react";
 
 import { Outlet } from "react-router-dom";
-import PostsProvider from "./context/postsContext";
-import UserProvider from "./context/userContext";
+import PostsProvider from "./context/PostsContext/postsContext";
+import UserProvider from "./context/UserContext/userContext";
 function App() {
   const [theme, setTheme] = useState("light");
   useEffect(() => {

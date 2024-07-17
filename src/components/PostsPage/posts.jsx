@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import usePostsContext from "../context/contextHooks/postsHook";
-import { Link } from "react-router-dom";
+import usePostsContext from "../../context/PostsContext/postsHook";
 
+import PostCard from "./PostCard";
 function Posts() {
   const { posts, loading, error } = usePostsContext();
 
@@ -15,23 +15,7 @@ function Posts() {
     <div className="mt-2 flex flex-1 flex-col items-center gap-2">
       <h1 className="text-2xl font-extrabold">Posts</h1>
       {posts && posts.length > 0 ? (
-        posts.map((post) => (
-          <div className="postCard" key={post._id}>
-            <h2 className="col-start-1 col-end-4 self-center text-xl font-bold">
-              {post.title}
-            </h2>
-            <h3 className="row-start-2 row-end-3 self-start">
-              Written by: {post.author.first_name}
-            </h3>
-            <p className="row-start-3">Created on: {post.createdAt}</p>
-            <Link
-              to={`/posts/${post._id}`}
-              className="btn col-start-3 row-start-3 row-end-4 justify-self-center"
-            >
-              View post
-            </Link>
-          </div>
-        ))
+        posts.map((post) => <PostCard key={post._id} post={post} />)
       ) : (
         <h2 className="h-full">There are no posts!</h2>
       )}

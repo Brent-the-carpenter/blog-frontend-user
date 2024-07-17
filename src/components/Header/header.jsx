@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import Login from "./login";
+import Login from "../Login/login";
 import PropTypes from "prop-types";
 import { useState, useRef, useEffect } from "react";
-import useUserContext from "../context/contextHooks/userHook";
-import useLogout from "../api/hooks/useLogout";
-import defaultAvatar from "../assets/user.png";
+import useUserContext from "../../context/UserContext/userHook";
+import useLogout from "../../api/hooks/useLogout";
+import defaultAvatar from "../../assets/user.png";
 function Header({ setTheme, theme }) {
   const [showLogin, setShowLogin] = useState(false);
   const loginRef = useRef(null);
@@ -69,7 +69,7 @@ function Header({ setTheme, theme }) {
                 </Link>
               )}
 
-              {user ? (
+              {user.token ? (
                 <Link to={"/"} className="link">
                   Home
                 </Link>

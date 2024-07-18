@@ -10,11 +10,19 @@ const useLogout = () => {
       const response = await logout(token);
       if (response) {
         setUser({ token: null, userName: null });
-        localStorage.removeItem("user");
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ token: null, userName: null }),
+        );
         setSuccess(response.message);
       }
     } catch (error) {
       console.error("Error:", error.status);
+      if (error.status === 401) {
+        setUser({ token: null, userName: null });
+        localStorage.removeItem("user");
+        setSuccess("You have been logged out");
+      }
       setError(error.message);
     }
   }, [token, setUser]);

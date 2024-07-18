@@ -27,7 +27,8 @@ function useGetUserLikedPost() {
         }
       } catch (error) {
         if (error.name !== "AbortError") {
-          setError(error);
+          console.error(error.message);
+          setError(error.message);
         }
       } finally {
         setLoading(false);

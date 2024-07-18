@@ -8,7 +8,7 @@ async function GetUserLikedPosts(token, signal) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        authorization: `bearer ${token}`,
       },
       signal: signal,
     });
